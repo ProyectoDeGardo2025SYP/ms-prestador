@@ -1,0 +1,32 @@
+name: Pull Request Chequeo
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+jobs:
+  pr-validation:
+    name: PR Chequeos de calidad (No Sonar)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'zulu'
+
+      - name: Permisos de ejecucion gradlew
+        run: chmod +x ./gradlew
+
+      - name: Compilacion
+        run: ./gradlew compileJava
+
+      - name: Tests
+        run: ./gradlew test
+
+      - name: Construccion del Jar
+        run: ./gradlew bootJar
