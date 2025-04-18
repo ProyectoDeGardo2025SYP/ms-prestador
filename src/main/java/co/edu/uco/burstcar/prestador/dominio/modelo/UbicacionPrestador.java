@@ -2,10 +2,11 @@ package co.edu.uco.burstcar.prestador.dominio.modelo;
 
 import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeAtibutos;
 import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeObjetos;
-import jakarta.validation.constraints.Size;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+@NoArgsConstructor
 public class UbicacionPrestador extends EntidadIdentificador{
 
     private String numeroVia;

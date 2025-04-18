@@ -25,7 +25,7 @@ public class MapeadorPrestadorEmisorAplicacion implements MapeadorAplicacion<Pre
         IdentificacionPrestador identificacionPrestador =
                 this.repositorioIdentificacionPrestador.asociarTipoIdentificacionPrestador(dto.getCategoriaIdentificador());
         UbicacionPrestador ubicacionPrestador = this.repositorioUbicacionPrestador.consultarUbicacionPorLatitudYLongitud(dto.getLatitudPrestador(), dto.getLongitudPrestador());
-        return new PrestadorEmisorDto(dto.getNumeroIdentificacion(), dto.getNombre(), dto.getUsuario(), dto.getNumeroTelefonico(), ubicacionPrestador.getIdentificador(),
+        return PrestadorEmisorDto.emisor(dto.getNumeroIdentificacion(), dto.getNombre(), dto.getUsuario(), dto.getNumeroTelefonico(), ubicacionPrestador.getIdentificador(),
                 ubicacionPrestador.getLatitud(), ubicacionPrestador.getLongitud(), identificacionPrestador.getNombre(), identificacionPrestador.getIdentificacionCategoriaId(),
                 identificacionPrestador.getIdentificador());
     }

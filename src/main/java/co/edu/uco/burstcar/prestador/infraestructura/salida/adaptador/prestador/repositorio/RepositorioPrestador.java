@@ -1,5 +1,7 @@
 package co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.prestador.repositorio;
 
+import co.edu.uco.burstcar.prestador.dominio.dto.PrestadorActualizacionDto;
+import co.edu.uco.burstcar.prestador.dominio.dto.PrestadorConsulta;
 import co.edu.uco.burstcar.prestador.dominio.modelo.*;
 import co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.calificacion.entidad.EntidadCalificacion;
 import co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.calificacion.repositorio.jpa.RepositorioCalificacionJpa;
@@ -111,8 +113,42 @@ public class RepositorioPrestador implements co.edu.uco.burstcar.prestador.domin
     }
 
     @Override
-    public Prestador consultarInformacionPrestador(String numeroIdentificacion) {
-        return null;
+    public PrestadorConsulta consultarInformacionPrestador(String numeroIdentificacion) {
+        EntidadPrestador entidadPrestador =
+                this.repositorioPrestadorJpa.consultarPrestadorPorSuIdentificacion(numeroIdentificacion);
+        EntidadUbicacionPrestador entidadUbicacionPrestador = this.repositorioUbicacionPrestadorJpa.findByLatitudAndLongitud(
+                entidadPrestador.getEntidadUbicacionPrestador().getLatitud(),
+                entidadPrestador.getEntidadUbicacionPrestador().getLongitud());
+        EntidadDelimitacionPrestador entidadDelimitacionPrestador = this.repositorioDelimitacionPrestadorJpa.findDelimitacion(
+                entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombrePais(),
+                entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombreDepartamento(),
+                entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombreCiudad(),
+                entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombreCorregimiento());
+        EntidadViaPrestador entidadViaPrestador = this.repositorioViaPrestadorJpa.findByNombre(
+                entidadPrestador.getEntidadUbicacionPrestador().getEntidadViaPrestador().getNombre());
+        UbicacionPrestador ubicacionPrestador = getUbicacionPrestador(entidadDelimitacionPrestador, entidadViaPrestador, entidadUbicacionPrestador);
+        List<EntidadCalificacion> calificacionesEntidad = this.repositorioCalificacionJpa.obtenerCalificacionesPorPrestador(entidadPrestador.getIdentificador());
+        ArrayList<Calificacion> calificaciones = calificacionesEntidad.stream()
+                .map(e -> Calificacion.nuevaCalificaionConIdentificador(e.getIdentificador(), e.getValor(), e.getComentario()))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return PrestadorConsulta.consulta(entidadPrestador.getIdentificador(), entidadPrestador.getNumeroIdentificacion(),
+                entidadPrestador.getNombre(), entidadPrestador.getNumeroTelefonico(), ubicacionPrestador,entidadPrestador.getEntidadIdentificacionPrestador().getIdentificacionCategoriaId(),
+                calificaciones);
+    }
+
+    @Override
+    public void actaulizarInformacionDelPrestador(PrestadorActualizacionDto dto, String numeroIdentificacion) {
+        EntidadPrestador entidadPrestador =
+                this.repositorioPrestadorJpa.consultarPrestadorPorSuIdentificacion(numeroIdentificacion);
+        if(entidadPrestador != null){
+            entidadPrestador.setNombre(dto.getNombre());
+            entidadPrestador.setUsuario(dto.getUsuario());
+            entidadPrestador.setContrasena(dto.getContrasena());
+            entidadPrestador.setNumeroTelefonico(dto.getNumeroTelefonico());
+            this.repositorioPrestadorJpa.save(entidadPrestador);
+        }
+
     }
 
     @Override

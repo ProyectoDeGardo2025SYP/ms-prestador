@@ -22,7 +22,7 @@ public class ServicioObtenerPrestadorActualJwt implements ServicioObtenerPrestad
     @Override
     public PrestadorActualDto obtener() {
         DecodedJWT decoded = JWT.decode(obtenerTokenActual());
-        return new PrestadorActualDto(decoded.getSubject(),
+        return PrestadorActualDto.prestadorActual(decoded.getSubject(),
                 decoded.getClaim("rol").asString());
 
     }

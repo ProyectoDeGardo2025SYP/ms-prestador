@@ -1,14 +1,9 @@
 package co.edu.uco.burstcar.prestador.dominio.modelo;
 
 import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeAtibutos;
-import jakarta.validation.constraints.Size;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.Setter;
 
 
-@Getter
-@Setter
 public class ViaPrestador extends EntidadIdentificador{
 
     private String nombre;

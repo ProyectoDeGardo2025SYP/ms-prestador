@@ -27,7 +27,7 @@ public class DelimitacionPrestador extends EntidadIdentificador{
 
     public static DelimitacionPrestador nuevaDelimitacion(String nombreCorregimiento, String nombreCiudad, UUID identificacionCiudad, String nombreDepartamento, UUID identificacionDepartamento, UUID identificacionPais, String nombrePais) {
         ValidadorDeAtibutos.validarAtributosTexto(nombreCorregimiento, "nombre de corregimiento", 20);
-        ValidadorDeAtibutos.validarAtributosTexto(nombreCiudad, "nombre de ciudad", 10);
+        ValidadorDeAtibutos.validarAtributosTexto(nombreCiudad, "nombre de ciudad", 20);
         ValidadorDeAtibutos.validarAtributosTexto(nombreDepartamento, "nombre de departamento", 20);
         ValidadorDeAtibutos.validarAtributosTexto(nombrePais, "nombre de país", 20);
         return new DelimitacionPrestador(nombreCorregimiento, nombreCiudad, identificacionCiudad, nombreDepartamento, identificacionDepartamento, identificacionPais, nombrePais);
@@ -46,7 +46,7 @@ public class DelimitacionPrestador extends EntidadIdentificador{
 
     public static DelimitacionPrestador nuevaDelimitacionConIdentificador(UUID id, String nombreCorregimiento, String nombreCiudad, UUID identificacionCiudad, String nombreDepartamento, UUID identificacionDepartamento, UUID identificacionPais, String nombrePais) {
         ValidadorDeAtibutos.validarAtributosTexto(nombreCorregimiento, "nombre de corregimiento", 20);
-        ValidadorDeAtibutos.validarAtributosTexto(nombreCiudad, "nombre de ciudad", 10);
+        ValidadorDeAtibutos.validarAtributosTexto(nombreCiudad, "nombre de ciudad", 20);
         ValidadorDeAtibutos.validarAtributosTexto(nombreDepartamento, "nombre de departamento", 20);
         ValidadorDeAtibutos.validarAtributosTexto(nombrePais, "nombre de país", 20);
         return new DelimitacionPrestador(id, nombreCorregimiento, nombreCiudad, identificacionCiudad, nombreDepartamento, identificacionDepartamento, identificacionPais, nombrePais);
