@@ -32,6 +32,7 @@ public class CasoDeUsoLoginPrestador {
             throw new IllegalStateException("Credenciales incorrectas");
         }
 
-        return new DtoResponse<>(this.servicioGenerarToken.generarToken(dto.getUsuario(), "prestador"));
+        return new DtoResponse<>(this.servicioGenerarToken.generarToken(dto.getUsuario(),
+                "prestador", prestador.getNumeroIdentificacion()));
     }
 }

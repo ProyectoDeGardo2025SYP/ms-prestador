@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface ServicioGenerarToken {
 
-    String generarToken(String user, String rol);
+    String generarToken(String user, String rol, String id);
 
 }
