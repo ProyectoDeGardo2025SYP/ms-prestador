@@ -5,7 +5,7 @@ import co.edu.uco.burstcar.prestador.dominio.modelo.UbicacionPrestador;
 import java.util.UUID;
 
 public interface RepositorioUbicacionPrestador {
-    void registrarInformacionActualUbicacion(UbicacionPrestador ubicacionPrestador);
+    UUID registrarInformacionActualUbicacion(UbicacionPrestador ubicacionPrestador);
     void actualizarInformacionActualUbicacion(UbicacionPrestador ubicacionPrestador);
     UbicacionPrestador consultarUbicacion(UUID identificador);
     UbicacionPrestador consultarUbicacionPorLatitudYLongitud(Double latiud, Double longitud);

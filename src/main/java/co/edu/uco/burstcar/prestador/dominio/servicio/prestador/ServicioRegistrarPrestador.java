@@ -11,7 +11,6 @@ public class ServicioRegistrarPrestador {
     }
 
     public void ejecutarRegistro(Prestador prestador){
-        System.out.println("DTO en dominio" + prestador.getIdentificacionPrestador().getIdentificacionCategoriaId());
         this.repositorioPrestador.registrarInformacionPersonal(prestador);
     }
 }

@@ -6,6 +6,8 @@ import co.edu.uco.burstcar.prestador.dominio.modelo.ViaPrestador;
 import co.edu.uco.burstcar.prestador.dominio.servicio.ubicacionprestador.ServicioRegistrarUbicacionPrestador;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class CasoDeUsoRegistrarUbicacionPrestador {
     private final ServicioRegistrarUbicacionPrestador servicioRegistrarUbicacionPrestador;
@@ -16,8 +18,8 @@ public class CasoDeUsoRegistrarUbicacionPrestador {
     }
 
 
-    public void ejecutarRegistro(UbicacionPrestadorDto dto) {
-        this.servicioRegistrarUbicacionPrestador.ejecutarRegistro(
+    public UUID ejecutarRegistro(UbicacionPrestadorDto dto) {
+        return this.servicioRegistrarUbicacionPrestador.ejecutarRegistro(
                 this.mapeadorUbicacionPrestadorAplicacion.aDominio(dto));
 
     }

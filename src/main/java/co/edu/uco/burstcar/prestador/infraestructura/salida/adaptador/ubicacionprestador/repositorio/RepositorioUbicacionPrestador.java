@@ -27,7 +27,7 @@ public class RepositorioUbicacionPrestador implements co.edu.uco.burstcar.presta
     }
 
     @Override
-    public void registrarInformacionActualUbicacion(UbicacionPrestador ubicacionPrestador) {
+    public UUID registrarInformacionActualUbicacion(UbicacionPrestador ubicacionPrestador) {
         EntidadDelimitacionPrestador entidadDelimitacionPrestador = this.repositorioDelimitacionPrestadorJpa.findDelimitacion(
                 ubicacionPrestador.getDelimitacionPrestador().getNombrePais(),
                 ubicacionPrestador.getDelimitacionPrestador().getNombreDepartamento(),
@@ -49,7 +49,7 @@ public class RepositorioUbicacionPrestador implements co.edu.uco.burstcar.presta
         );
         entidadUbicacionPrestador.setIdentificador(ubicacionPrestador.getIdentificador());
 
-        this.repositorioUbicacionPrestadorJpa.save(entidadUbicacionPrestador);
+        return this.repositorioUbicacionPrestadorJpa.save(entidadUbicacionPrestador).getIdentificador();
     }
 
     @Override

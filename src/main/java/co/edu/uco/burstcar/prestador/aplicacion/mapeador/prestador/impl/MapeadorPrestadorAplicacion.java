@@ -25,7 +25,7 @@ public class MapeadorPrestadorAplicacion implements MapeadorAplicacion<Prestador
     public Prestador aDominio(PrestadorDto dto) {
 
         UbicacionPrestador ubicacionPrestador =
-                this.repositorioUbicacionPrestador.consultarUbicacionPorLatitudYLongitud(dto.getLatitudPrestador(), dto.getLongitudPrestador());
+                this.repositorioUbicacionPrestador.consultarUbicacion(dto.getIdUbicacion());
 
         return Prestador.nuevoPrestador(dto.getNumeroIdentificacion(), dto.getNombre(), dto.getUsuario(), dto.getContrasena(),
                 dto.getNumeroTelefonico(),

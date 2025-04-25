@@ -5,6 +5,8 @@ import co.edu.uco.burstcar.prestador.aplicacion.casodeuso.ubicacionprestador.com
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/prestador/ubicacion")
 public class ComandoControladorUbicacionPrestador {
@@ -18,8 +20,8 @@ public class ComandoControladorUbicacionPrestador {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/nuevo")
-    public void registrarUbicaion(@RequestBody UbicacionPrestadorDto dto){
-        this.casoDeUsoRegistrarUbicacionPrestador.ejecutarRegistro(dto);
+    public UUID registrarUbicaion(@RequestBody UbicacionPrestadorDto dto){
+        return this.casoDeUsoRegistrarUbicacionPrestador.ejecutarRegistro(dto);
     }
 
 }

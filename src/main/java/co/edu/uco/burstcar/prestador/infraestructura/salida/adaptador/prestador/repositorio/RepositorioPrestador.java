@@ -44,9 +44,7 @@ public class RepositorioPrestador implements co.edu.uco.burstcar.prestador.domin
     @Override
     public void registrarInformacionPersonal(Prestador prestador) {
         EntidadUbicacionPrestador entidadUbicacionPrestador =
-                this.repositorioUbicacionPrestadorJpa.findByLatitudAndLongitud(
-                        prestador.getUbicacion().getLatitud(),
-                        prestador.getUbicacion().getLongitud());
+                this.repositorioUbicacionPrestadorJpa.findById(prestador.getUbicacion().getIdentificador()).orElse(null);
 
         EntidadIdentificacionPrestador entidadIdentificacionPrestador =
                 this.repositorioIdentificacionPrestadorJpa.findByCodigo(

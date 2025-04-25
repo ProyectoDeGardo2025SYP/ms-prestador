@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -18,7 +20,6 @@ public class PrestadorDto extends EntidadIdentificador {
     private String usuario;
     private String contrasena;
     private Long numeroTelefonico;
-    private Double latitudPrestador;
-    private Double longitudPrestador;
+    private UUID idUbicacion;
     private String categoriaIdentificador;
 }
