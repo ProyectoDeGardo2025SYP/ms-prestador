@@ -15,5 +15,5 @@ public interface RepositorioPrestadorJpa extends JpaRepository<EntidadPrestador,
             "numero_identificacion = :identificacion", nativeQuery = true)
     EntidadPrestador consultarPrestadorPorSuIdentificacion(@Param("identificacion")String identificacion);
 
-    EntidadPrestador findByUsuarioAndContrasena(String usuario, String contrasena);
+    EntidadPrestador findByUsuario(String usuario);
 }

@@ -22,7 +22,7 @@ public class EntidadPrestador extends EntidadIdentificador {
     private String nombre;
     @Column(length = 15, nullable = false, unique = true)
     private String usuario;
-    @Column(length = 16, nullable = false)
+    @Column(nullable = false)
     private String contrasena;
     @Column
     private Long numeroTelefonico;

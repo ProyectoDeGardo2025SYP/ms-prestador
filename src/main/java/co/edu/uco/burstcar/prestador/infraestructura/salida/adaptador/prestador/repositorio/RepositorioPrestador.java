@@ -3,6 +3,7 @@ package co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.prestador
 import co.edu.uco.burstcar.prestador.dominio.dto.PrestadorActualizacionDto;
 import co.edu.uco.burstcar.prestador.dominio.dto.PrestadorConsulta;
 import co.edu.uco.burstcar.prestador.dominio.modelo.*;
+import co.edu.uco.burstcar.prestador.dominio.util.seguridad.EncriptadorContrasena;
 import co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.calificacion.entidad.EntidadCalificacion;
 import co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.calificacion.repositorio.jpa.RepositorioCalificacionJpa;
 import co.edu.uco.burstcar.prestador.infraestructura.salida.adaptador.delimitacionprestador.entidad.EntidadDelimitacionPrestador;
@@ -61,10 +62,14 @@ public class RepositorioPrestador implements co.edu.uco.burstcar.prestador.domin
 
     @Override
     public Prestador realizarInicioSesion(String usuario, String contrasena) {
-        EntidadPrestador entidadPrestador = this.repositorioPrestadorJpa.findByUsuarioAndContrasena(usuario, contrasena);
-        EntidadUbicacionPrestador entidadUbicacionPrestador = this.repositorioUbicacionPrestadorJpa.findByLatitudAndLongitud(
-                entidadPrestador.getEntidadUbicacionPrestador().getLatitud(),
-                entidadPrestador.getEntidadUbicacionPrestador().getLongitud());
+        EntidadPrestador entidadPrestador = this.repositorioPrestadorJpa.findByUsuario(usuario);
+
+        if (entidadPrestador == null || !EncriptadorContrasena.validarContrasena(contrasena, entidadPrestador.getContrasena())) {
+            throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+        }
+
+        EntidadUbicacionPrestador entidadUbicacionPrestador = this.repositorioUbicacionPrestadorJpa.findById(
+                entidadPrestador.getEntidadUbicacionPrestador().getIdentificador()).orElse(null);
         EntidadIdentificacionPrestador entidadIdentificacionPrestador = this.repositorioIdentificacionPrestadorJpa.findByCodigo(
                 entidadPrestador.getEntidadIdentificacionPrestador().getIdentificacionCategoriaId());
         List<EntidadCalificacion> calificacionesEntidad = this.repositorioCalificacionJpa.obtenerCalificacionesPorPrestador(entidadPrestador.getIdentificador());

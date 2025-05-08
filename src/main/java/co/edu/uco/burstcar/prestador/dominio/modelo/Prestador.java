@@ -1,7 +1,8 @@
 package co.edu.uco.burstcar.prestador.dominio.modelo;
 
+import co.edu.uco.burstcar.prestador.dominio.util.seguridad.EncriptadorContrasena;
 import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeAtibutos;
-import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeObjetos;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -32,11 +33,12 @@ public class Prestador extends EntidadIdentificador{
         ValidadorDeAtibutos.validarAtributosTexto(numeroIdentificacion, "Número de identificación", 12);
         ValidadorDeAtibutos.validarAtributosTexto(nombre, "nombre", 30);
         ValidadorDeAtibutos.validarAtributosTexto(usuario, "usuario", 15);
-        ValidadorDeAtibutos.validarAtributosTexto(contrasena, "contraseña", 16);
-        ValidadorDeObjetos.validateNoNulos(numeroTelefonico, "Número telefonico");
-        ValidadorDeObjetos.validateNoNulos(ubicacion, "Ubicación del prestador");
-        ValidadorDeObjetos.validateNoNulos(identificacionPrestador, "Identificación del prestador");
-        return new Prestador(numeroIdentificacion, nombre, usuario, contrasena, numeroTelefonico, ubicacion, identificacionPrestador, calificaciones);
+        ValidadorDeAtibutos.validarContrasena(contrasena);
+        ValidadorDeAtibutos.validarObjetoNoNulo(numeroTelefonico, "Número telefonico");
+        ValidadorDeAtibutos.validarObjetoNoNulo(ubicacion, "Ubicación del prestador");
+        ValidadorDeAtibutos.validarObjetoNoNulo(identificacionPrestador, "Identificación del prestador");
+        String contrasenaEncriptada = EncriptadorContrasena.encriptarContrasenaConSalt(contrasena);
+        return new Prestador(numeroIdentificacion, nombre, usuario, contrasenaEncriptada, numeroTelefonico, ubicacion, identificacionPrestador, calificaciones);
     }
 
     private Prestador(UUID identificador, String numeroIdentificacion, String nombre, String usuario, String contrasena, Long numeroTelefonico, UbicacionPrestador ubicacion, IdentificacionPrestador identificacionPrestador, ArrayList<Calificacion> calificaciones) {
@@ -55,10 +57,9 @@ public class Prestador extends EntidadIdentificador{
         ValidadorDeAtibutos.validarAtributosTexto(numeroIdentificacion, "Número de identificación", 12);
         ValidadorDeAtibutos.validarAtributosTexto(nombre, "nombre", 30);
         ValidadorDeAtibutos.validarAtributosTexto(usuario, "usuario", 15);
-        ValidadorDeAtibutos.validarAtributosTexto(contrasena, "contraseña", 16);
-        ValidadorDeObjetos.validateNoNulos(numeroTelefonico, "Número telefonico");
-        ValidadorDeObjetos.validateNoNulos(ubicacion, "Ubicación del prestador");
-        ValidadorDeObjetos.validateNoNulos(identificacionPrestador, "Identificación del prestador");
+        ValidadorDeAtibutos.validarObjetoNoNulo(numeroTelefonico, "Número telefonico");
+        ValidadorDeAtibutos.validarObjetoNoNulo(ubicacion, "Ubicación del prestador");
+        ValidadorDeAtibutos.validarObjetoNoNulo(identificacionPrestador, "Identificación del prestador");
         return new Prestador(id, numeroIdentificacion, nombre, usuario, contrasena, numeroTelefonico, ubicacion, identificacionPrestador, calificaciones);
     }
 
@@ -93,4 +94,8 @@ public class Prestador extends EntidadIdentificador{
     public ArrayList<Calificacion> getCalificaciones() {
         return calificaciones;
     }
+    private void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
 }

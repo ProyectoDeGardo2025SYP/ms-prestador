@@ -1,13 +1,10 @@
 package co.edu.uco.burstcar.prestador.dominio.modelo;
 
 import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeAtibutos;
-import co.edu.uco.burstcar.prestador.dominio.validador.ValidadorDeObjetos;
-import jakarta.validation.constraints.Size;
-import java.util.UUID;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import java.util.UUID;
+
+import lombok.NoArgsConstructor;
 
 
 @NoArgsConstructor
@@ -22,7 +19,7 @@ public class Calificacion extends EntidadIdentificador{
     }
 
     public static Calificacion nuevaCalificaion(Double valor, String comentario) {
-        ValidadorDeObjetos.validateNoNulos(valor, "Valor de la calificación");
+        ValidadorDeAtibutos.validarObjetoNoNulo(valor, "Valor de la calificación");
         ValidadorDeAtibutos.validarAtributosTexto(comentario, "comentario", 100);
         return new Calificacion(valor, comentario);
     }
@@ -34,7 +31,7 @@ public class Calificacion extends EntidadIdentificador{
     }
 
     public static Calificacion nuevaCalificaionConIdentificador(UUID id, Double valor, String comentario) {
-        ValidadorDeObjetos.validateNoNulos(valor, "Valor de la calificación");
+        ValidadorDeAtibutos.validarObjetoNoNulo(valor, "Valor de la calificación");
         ValidadorDeAtibutos.validarAtributosTexto(comentario, "comentario", 100);
         return new Calificacion(id, valor, comentario);
     }
