@@ -119,9 +119,8 @@ public class RepositorioPrestador implements co.edu.uco.burstcar.prestador.domin
     public PrestadorConsulta consultarInformacionPrestador(String numeroIdentificacion) {
         EntidadPrestador entidadPrestador =
                 this.repositorioPrestadorJpa.consultarPrestadorPorSuIdentificacion(numeroIdentificacion);
-        EntidadUbicacionPrestador entidadUbicacionPrestador = this.repositorioUbicacionPrestadorJpa.findByLatitudAndLongitud(
-                entidadPrestador.getEntidadUbicacionPrestador().getLatitud(),
-                entidadPrestador.getEntidadUbicacionPrestador().getLongitud());
+        EntidadUbicacionPrestador entidadUbicacionPrestador = this.repositorioUbicacionPrestadorJpa.findById(
+                entidadPrestador.getEntidadUbicacionPrestador().getIdentificador()).orElse(null);
         EntidadDelimitacionPrestador entidadDelimitacionPrestador = this.repositorioDelimitacionPrestadorJpa.findDelimitacion(
                 entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombrePais(),
                 entidadPrestador.getEntidadUbicacionPrestador().getEntidadDelimitacionPrestador().getNombreDepartamento(),
