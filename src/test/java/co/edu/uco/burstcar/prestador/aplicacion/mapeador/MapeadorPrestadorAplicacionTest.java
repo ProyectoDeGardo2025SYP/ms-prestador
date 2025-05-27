@@ -47,8 +47,6 @@ public class MapeadorPrestadorAplicacionTest {
         dto.setUsuario("juan123");
         dto.setContrasena("secreta");
         dto.setNumeroTelefonico(1234567890L);
-        dto.setLatitudPrestador(12.23456789);
-        dto.setLongitudPrestador(12.23456789);
         dto.setCategoriaIdentificador("CC");
         when(repositorioUbicacionPrestador.consultarUbicacionPorLatitudYLongitud(12.23456789, 12.23456789))
                 .thenReturn(ubicacionPrestador);
@@ -77,8 +75,6 @@ public class MapeadorPrestadorAplicacionTest {
         dto.setUsuario("juan123");
         dto.setContrasena("secreta");
         dto.setNumeroTelefonico(1234567890L);
-        dto.setLatitudPrestador(12.23456789);
-        dto.setLongitudPrestador(12.23456789);
         dto.setCategoriaIdentificador("CC");
         when(repositorioIdentificacionPrestador.asociarTipoIdentificacionPrestador("otra"))
                 .thenThrow(new IllegalArgumentException("El atributo Identificación del prestador no puede estar nulo"));
@@ -94,8 +90,6 @@ public class MapeadorPrestadorAplicacionTest {
         dto.setUsuario("juan123");
         dto.setContrasena("secreta");
         dto.setNumeroTelefonico(1234567890L);
-        dto.setLatitudPrestador(12.23456789);
-        dto.setLongitudPrestador(12.23456789);
         dto.setCategoriaIdentificador("CC");
         when(repositorioUbicacionPrestador.consultarUbicacionPorLatitudYLongitud(12.23456789, 12.23456789))
                 .thenReturn(ubicacionPrestador);
